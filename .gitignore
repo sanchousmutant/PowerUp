@@ -30,6 +30,13 @@ yarn-error.*
 .DS_Store
 *.pem
 
+# IDE
+.idea/
+.vscode/
+
+# Build artifacts
+*.apk
+
 # local env files
 .env*.local
 
