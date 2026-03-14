@@ -51,7 +51,11 @@ export default function WorkoutScreen() {
 
     return () => {
       cancelled = true;
-      metronomRef.current?.stopAsync().then(() => metronomRef.current?.unloadAsync());
+      const sound = metronomRef.current;
+      if (sound) {
+        sound.stopAsync().catch(() => {}).then(() => sound.unloadAsync().catch(() => {}));
+        metronomRef.current = null;
+      }
     };
   }, []);
 
@@ -84,7 +88,7 @@ export default function WorkoutScreen() {
 
     return () => {
       cancelled = true;
-      exerciseSoundRef.current?.unloadAsync();
+      exerciseSoundRef.current?.unloadAsync().catch(() => {});
     };
   }, [exerciseIndex]);
 
@@ -132,7 +136,7 @@ export default function WorkoutScreen() {
     if (exerciseIndex < exercises.length - 1) {
       setExerciseIndex((prev) => prev + 1);
     } else {
-      metronomRef.current?.stopAsync();
+      metronomRef.current?.stopAsync().catch(() => {});
       router.replace('/finish');
     }
   }, [exerciseIndex, router]);

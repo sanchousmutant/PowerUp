@@ -1,12 +1,9 @@
-import { View, Text, StyleSheet } from 'react-native';
-import { useRouter } from 'expo-router';
+import { View, Text, StyleSheet, BackHandler } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button } from '../components/Button';
 import { Colors, FontSize, Spacing } from '../constants/theme';
 
 export default function FinishScreen() {
-  const router = useRouter();
-
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
@@ -18,7 +15,7 @@ export default function FinishScreen() {
         </View>
         <Button
           title="Теперь можно в душ!"
-          onPress={() => router.replace('/')}
+          onPress={() => BackHandler.exitApp()}
         />
       </View>
     </SafeAreaView>
